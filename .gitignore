@@ -1,0 +1,17 @@
+.vscode/
+**/bin/
+**/bin-int/
+**.DS_Store
+
+Assets/Prefs
+
+#makefiles
+**/Makefile
+**/src/Makefile
+**/.vscode/
+
+# Visual studio related files
+**/*.sln
+**/.vs/
+**/src/*.vcxproj*
+# lec*/src/*.vcxproj.filters
