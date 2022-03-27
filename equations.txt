@@ -1,0 +1,25 @@
+# Empty lines and lines starting with a '#' sign are ignored
+# Press the 'r' key in the program to reload this text file, and recalculate meshes
+
+#------------------------
+# Example of simple expressions. Uncomment to see it being drawn 
+# 0.2*x + y/2
+# sin( x )
+# cos( 2*pi * y / 4)
+
+#------------------------
+# Example of user defined constants. Note 'pi' and 'e' are in built and cannot be redefined 
+# speed = 0.5 + 2
+# speed * x
+
+#------------------------
+# Named user defined functions. 
+# Note that 'x', 'y' and 'z' are implicit parameters and user parameters need to be called something else
+# f(a,b) = a*sin(x) + b*cos(y)
+# f(1, 0)
+# f(0, 1) + 1
+
+# c = 1
+# f( c, (1-c) )
+
+sin(x) * exp(y/7)

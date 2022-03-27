@@ -1,0 +1,34 @@
+#shader vertex
+#version 330 core
+layout(location = 0) in vec3 a_pos;
+layout(location = 1) in vec2 a_tex;
+layout(location = 2) in vec4 a_col;
+layout(location = 3) in float a_texId;
+
+out vec2 frag_tex;
+out vec4 frag_col;
+out float frag_texId;
+
+void main() {
+    frag_tex = a_tex;
+    frag_col = a_col;
+    frag_texId = a_texId;
+    gl_Position = vec4(a_pos, 1.0);
+}
+
+#shader fragment
+#version 330 core
+layout(location = 0) out vec4 col;
+
+in vec2 frag_tex;
+in vec4 frag_col;
+in float frag_texId;
+
+uniform sampler2D u_textureSlots[16];
+
+void main() {
+    
+    int id = int(frag_texId);
+
+    col = texture(u_textureSlots[id], frag_tex).x * frag_col;
+}

@@ -1,0 +1,69 @@
+#shader vertex
+#version 330 core
+layout(location = 0) in vec3 a_pos;
+layout(location = 1) in vec4 a_col;
+layout(location = 2) in vec3 a_norm;
+
+out vec3 frag_pos;
+out vec4 frag_col;
+out vec3 frag_norm;
+
+uniform mat4 mat_proj;
+
+void main() {
+    frag_pos = a_pos;
+    frag_col = a_col;
+    frag_norm = a_norm;
+    gl_Position = mat_proj * vec4(a_pos, 1.0);
+}
+
+
+
+#shader fragment
+#version 330 core
+layout(location = 0) out vec4 out_col;
+
+in vec3 frag_pos;
+in vec4 frag_col;
+in vec3 frag_norm;
+
+uniform float ambient_strength;
+uniform vec3 light_color;
+
+// For point light
+// vec3 light_pos = vec3(5, 5, 5);
+
+// For directional light
+uniform vec3 light_dir;
+
+vec3 PointLight(float ambientStrength, vec3 lightCol, vec3 lightPos) {
+    vec3 ambient = ambientStrength * lightCol;
+    vec3 norm = normalize(frag_norm);
+    vec3 lightDir = normalize(lightPos - frag_pos);  
+
+    float diff = max(dot(norm, lightDir), 0.0);
+    vec3 diffuse = diff * lightCol;
+
+    vec3 finalCol = ambient + diffuse;
+    return finalCol;
+}
+
+vec3 DirectionLight(float ambientStrength, vec3 lightCol, vec3 lightDir) {
+    vec3 ambient = ambientStrength * lightCol;
+    vec3 norm = normalize(frag_norm);
+    lightDir = normalize(-lightDir);  
+
+    float diff = max(dot(norm, lightDir), 0.0);
+    vec3 diffuse = diff * lightCol;
+
+    vec3 finalCol = ambient + diffuse;
+    return finalCol;
+}
+
+void main() {
+
+    // vec3 col = PointLight(ambient_strength, light_color, light_pos);
+    vec3 col = DirectionLight(ambient_strength, light_color, light_dir);
+
+    out_col = vec4(col, 1.0) * frag_col;
+}

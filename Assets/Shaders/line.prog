@@ -1,0 +1,92 @@
+// #shader vertex
+// #version 330 core
+// layout(location = 0) in vec3 a_pos;
+// layout(location = 1) in vec4 a_col;
+// layout(location = 2) in float a_width;
+
+// out vec4 geo_col;
+// out float geo_width;
+
+// uniform mat4 mat_proj;
+
+// void main() {
+//     geo_col = a_col;
+//     geo_width = a_width;
+//     gl_Position = mat_proj * vec4(a_pos, 1.0);
+
+//     //Calculate a the length of 1 unit of x axis and y axis in NDC units. Todo: this can be calculated in CPU and uploaded as a uniform
+
+// }
+
+// #shader geo
+// #version 330 core
+// layout(lines) in;
+// layout(triangle_strip, max_vertices = 4) out;
+
+// in vec4 geo_col[];
+// in float geo_width[];
+
+// out vec4 frag_col;
+
+// uniform vec2 windowSize;
+
+// void main() {
+
+//     vec2 dir = (gl_in[1].gl_Position.xy - gl_in[0].gl_Position.xy);
+//     //Geo width thickness is given in pixels. This is so that when we zoom in/out, the thickness remains the same
+//     vec2 norm = normalize(vec2(-dir.y, dir.x)) / windowSize;
+
+
+//     vec4 offset = vec4(norm.xy, 0.0, 0.0);
+
+//     gl_Position = gl_in[0].gl_Position + offset*geo_width[0];
+//     frag_col = geo_col[0];
+//     EmitVertex();
+    
+//     gl_Position = gl_in[0].gl_Position - offset*geo_width[0];
+//     frag_col = geo_col[0];
+//     EmitVertex();
+
+//     gl_Position = gl_in[1].gl_Position + offset*geo_width[1];
+//     frag_col = geo_col[1];
+//     EmitVertex();
+
+//     gl_Position = gl_in[1].gl_Position - offset*geo_width[1];
+//     frag_col = geo_col[1];
+//     EmitVertex();
+
+
+//     EndPrimitive();
+
+// }
+
+
+#shader vertex
+#version 330 core
+layout(location = 0) in vec3 a_pos;
+layout(location = 1) in vec4 a_col;
+layout(location = 2) in float a_width;
+
+out vec4 frag_col;
+
+uniform mat4 mat_proj;
+
+void main() {
+    frag_col = a_col;
+    gl_Position = mat_proj * vec4(a_pos, 1.0);
+
+    //Calculate a the length of 1 unit of x axis and y axis in NDC units. Todo: this can be calculated in CPU and uploaded as a uniform
+
+}
+
+
+
+#shader fragment
+#version 330 core
+layout(location = 0) out vec4 col;
+
+in vec4 frag_col;
+
+void main() {
+    col = frag_col;
+}
