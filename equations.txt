@@ -18,8 +18,10 @@
 # f(a,b) = a*sin(x) + b*cos(y)
 # f(1, 0)
 # f(0, 1) + 1
-
 # c = 1
 # f( c, (1-c) )
 
+# Demos
 sin(x) * exp(y/7)
+# sin(x)
+# (0.5*x^2 + 0.5*y^2) / 10
