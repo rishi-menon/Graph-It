@@ -9,5 +9,5 @@
 <img src="Demo/Img6.png" width=800>  
   
 **About**  
-Graph is a 3D graphing tool which can graph mathematical equations containing three variables
+GraphIt is a 3D graphing tool which can graph mathematical equations containing three variables
 
