@@ -1,4 +1,4 @@
-# Dasher
+# GraphIt
 
 **Screenshots**  
 <img src="Demo/Img1.png" width=800>  
